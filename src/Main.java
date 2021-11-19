@@ -1,5 +1,10 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.printf("Hello world ");
+
+        Etudiant etudiant = Etudiant.createEtudiant();
+        etudiant.afficher();
+        etudiant.bonifier(10);
+        etudiant.afficher();
+
     }
 }
