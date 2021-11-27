@@ -27,7 +27,7 @@ public class Etudiant
                 " NOM : " + nom + "\n" +
                 " GENRE : " + genre + "\n" +
                 " DATE DE NAISSANCE : " + dateNaissance + "\n" +
-                " MOYENNE : " + moyenne);
+                " MOYENNE : " + moyenne + "\n");
     }
 
     // La fonction qui fait le Calcule de âge
@@ -40,11 +40,11 @@ public class Etudiant
         if(bonus < 0)
             System.err.println("Erreur! il n'y a pas des bonus négatives!!!");
         else if((this.moyenne + bonus) > 20){
-            System.err.println("Erreur! la moyenne bonifier ne doit pas excéder 20");
+            System.err.println("ATTENTION! la moyenne bonifier ne doit pas excéder 20");
             System.out.println("La moyenne soit initialiser à 20");
-            return moyenne = 20;
+            return 20;
         }else
-            return (moyenne += bonus);
+            return bonus;
         return 0;
     }
 }

@@ -40,48 +40,52 @@ public class GestionEtudiant {
     }
 
     void listEtudiantOrdonnee(Etudiant[] etudiants){
-        if(etudiants == null) System.out.println(" La liste est vide.");
-        System.out.println("La Liste des Etudants Ordonnée:\n");
-        int longueur = etudiants.length;
-        for(int i = 0; i < longueur; i++){
-            for (int j = 1; j < longueur; j++) {
-                if (etudiants[i].moyenne > etudiants[j].moyenne) {
-                    Etudiant etudiant = etudiants[i];
-                    etudiants[i] = etudiants[j];
-                    etudiants[j] = etudiant;
+        if(etudiants == null) System.out.println(" Rien à afficher, La liste est vide.");
+        else{
+            System.out.println("La Liste des Etudants Ordonnée:\n");
+            int longueur = etudiants.length;
+            for(int i = 0; i < longueur; i++) {
+                for (int j = 1; j <= longueur; j++) {
+                    if (etudiants[i].moyenne > etudiants[j].moyenne) {
+                        Etudiant etudiant = etudiants[i];
+                        etudiants[i] = etudiants[j];
+                        etudiants[j] = etudiant;
+                    }
                 }
             }
-        }
-
-        for (Etudiant etudiant : etudiants) {
             System.out.println(" - Les Informations des Etudiants : ");
-            etudiant.afficher();
+            for (Etudiant etudiant : etudiants) {
+                etudiant.afficher();
+            }
         }
     }
 
     void inforamtionPremierEtudiant(Etudiant[] etudiants){
-        if(etudiants == null) System.out.println(" La liste est vide.");
-        System.out.println("Informations sur le Dernier Etudiant:");
-        int longuer = etudiants.length;
-        Etudiant premierEtudiant = etudiants[0];
-        for(int i = 1; i < longuer; i++){
-            if(etudiants[i].moyenne > premierEtudiant.moyenne) premierEtudiant = etudiants[i];
+        if(etudiants == null) System.out.println(" Rien à afficher, La liste est vide.");
+        else {
+            System.out.println("Informations sur le Dernier Etudiant:");
+            int longuer = etudiants.length;
+            Etudiant premierEtudiant = etudiants[0];
+            for (int i = 1; i < longuer; i++) {
+                if (etudiants[i].moyenne > premierEtudiant.moyenne) premierEtudiant = etudiants[i];
+            }
+            System.out.println(" - Les Informations du prémière étudiant : ");
+            premierEtudiant.afficher();
         }
-        System.out.println(" - Les Informations du prémière étudiant : "+ premierEtudiant.nom);
-        premierEtudiant.afficher();
     }
 
     void inforamtionDernierEtudiant(Etudiant[] etudiants){
-        if(etudiants == null) System.out.println(" La liste est vide.");
-        System.out.println("Informations sur le Dernier Etudiant:");
-        int longuer = etudiants.length;
-        Etudiant dernierEtudiant = etudiants[0];
-        for(int i = 1; i < longuer; i++){
-            if(etudiants[i].moyenne < dernierEtudiant.moyenne) dernierEtudiant = etudiants[i];
-        }
+        if(etudiants == null) System.out.println(" Rien à afficher, La liste est vide.");
+        else {
+            int longuer = etudiants.length;
+            Etudiant dernierEtudiant = etudiants[0];
+            for (int i = 1; i < longuer; i++) {
+                if (etudiants[i].moyenne < dernierEtudiant.moyenne) dernierEtudiant = etudiants[i];
+            }
 
-        System.out.println(" - Les Informations du dernier étudiant : "+ dernierEtudiant.nom);
-        dernierEtudiant.afficher();
+            System.out.println(" - Les Informations du dernier étudiant : ");
+            dernierEtudiant.afficher();
+        }
     }
 
     public Etudiant createEtudiant(){
@@ -172,6 +176,7 @@ public class GestionEtudiant {
                 System.out.print("Recomencer : ");
             }
         }while (bonus > 20 || bonus < 0);
+        System.out.println("\tBonification reussi.");
         return bonus;
     }
 
@@ -208,4 +213,3 @@ public class GestionEtudiant {
         return position;
     }
 }
-R

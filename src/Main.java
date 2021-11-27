@@ -27,12 +27,13 @@ public class Main {
             Date dateEtudiant = etudiants[etudiantChoisi].dateNaissance;
             int ageEtudiant = etudiants[etudiantChoisi].calculerAge(dateEtudiant);
             if (ageEtudiant != -1) {
+                System.out.println("\nCalcule d'âge...");
                 System.out.println("Âge de "+ etudiants[etudiantChoisi].nom +" est: "+ ageEtudiant +" ans");
             }
         }
 
         do{
-            System.out.println("Menu d'utilisation du programme");
+            System.out.println("\n - [Menu d'utilisation du programme] -");
             System.out.println(gestionnaire.afficheMenuProgramme());
 
             choixMenu = gestionnaire.faireChoixMenu();
@@ -41,7 +42,7 @@ public class Main {
                 case 1 : gestionnaire.listEtudiantOrdonnee(etudiants); break;
                 case 2 : gestionnaire.inforamtionPremierEtudiant(etudiants); break;
                 case 3 : gestionnaire.inforamtionDernierEtudiant(etudiants); break;
-                case 4 : etudiants = null; System.out.println("La liste est bien réinitialiser..!"); break;
+                case 4 : etudiants = null; System.out.println("La liste est bien réinitialiser!"); break;
                 case 5 : System.out.println("---------- FIN DU PROGRAMME ----------"); break;
             }
 
