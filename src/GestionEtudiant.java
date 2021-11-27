@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class GestionEtudiant {
 
     Scanner clavier = new Scanner(System.in);
-    //Etudiant[] etudiants;
 
     int nombreEtudiant(){
         Scanner clavier = new Scanner(System.in);
@@ -20,7 +19,7 @@ public class GestionEtudiant {
     }
 
     String afficheMenuProgramme(){
-        return " 1. Afficher les étudiants par ordre de mérite \n " +
+        return "\n 1. Afficher les étudiants par ordre de mérite \n" +
                 " 2. Afficher les informations sur le premier étudiant\n" +
                 " 3. Afficher les informations du dernier étudiant\n" +
                 " 4. Réinitialiser la liste de la classe\n" +
@@ -41,6 +40,7 @@ public class GestionEtudiant {
     }
 
     void listEtudiantOrdonnee(Etudiant[] etudiants){
+        if(etudiants == null) System.out.println(" La liste est vide.");
         System.out.println("La Liste des Etudants Ordonnée:\n");
         int longueur = etudiants.length;
         for(int i = 0; i < longueur; i++){
@@ -60,6 +60,7 @@ public class GestionEtudiant {
     }
 
     void inforamtionPremierEtudiant(Etudiant[] etudiants){
+        if(etudiants == null) System.out.println(" La liste est vide.");
         System.out.println("Informations sur le Dernier Etudiant:");
         int longuer = etudiants.length;
         Etudiant premierEtudiant = etudiants[0];
@@ -71,6 +72,7 @@ public class GestionEtudiant {
     }
 
     void inforamtionDernierEtudiant(Etudiant[] etudiants){
+        if(etudiants == null) System.out.println(" La liste est vide.");
         System.out.println("Informations sur le Dernier Etudiant:");
         int longuer = etudiants.length;
         Etudiant dernierEtudiant = etudiants[0];
@@ -87,8 +89,9 @@ public class GestionEtudiant {
         String matriculeEtudiant = matriculeEtudiant();
         char genreEtudiant = genreEtudiant();
         Date date = dateNaissance();
+        double moyenneEtudiant = moyenneEtudiant();
 
-        return new Etudiant(matriculeEtudiant,nomEtudiant,genreEtudiant,date);
+        return new Etudiant(matriculeEtudiant,nomEtudiant,genreEtudiant,date,moyenneEtudiant);
     }
 
     String nomEtudiant(){
@@ -116,9 +119,9 @@ public class GestionEtudiant {
             System.out.print("Quelle est le genre de l'étudiant : ");
             genre = clavier.nextLine().charAt(0);
             if(genre == 'M' || genre == 'm') goodGenre = true;
-            if(genre == 'F' || genre == 'f') goodGenre = true;
-            if(genre != 'M' ^ genre != 'm') System.err.println("Genre invalide!");
-            if(genre != 'M' ^ genre != 'f') System.err.println("Genre invalide!");
+            else if(genre == 'F' || genre == 'f') goodGenre = true;
+            else if(genre != 'M' || genre != 'm') System.err.println("Genre invalide!");
+            else if(genre != 'F' || genre != 'f') System.err.println("Genre invalide!");
         }
         return genre;
     }
@@ -139,4 +142,70 @@ public class GestionEtudiant {
         }
         return date;
     }
+
+    double moyenneEtudiant(){
+        double moyenne;
+        System.out.print("Quelle est la moyenne de l'étudant: ");
+        do{
+            moyenne = clavier.nextDouble();
+            clavier.nextLine();
+            if(moyenne > 20 || moyenne < 0) {
+                System.err.println("La moyenne doit ếtre comprise entre 0 et 20");
+                System.out.print("Recomencer : ");
+            }
+        }while (moyenne > 20 || moyenne < 0);
+        return moyenne;
+    }
+
+    double bonification(){
+        boolean reponse = demandeBonification();
+        if(reponse == false) return 0;
+
+        double bonus;
+
+        System.out.print("Combiens de Bonus? : ");
+        do{
+            bonus = clavier.nextDouble();
+            clavier.nextLine();
+            if(bonus > 20 || bonus < 0) {
+                System.err.println("Le Bonus doit être comprise entre 0 et 20");
+                System.out.print("Recomencer : ");
+            }
+        }while (bonus > 20 || bonus < 0);
+        return bonus;
+    }
+
+    boolean demandeBonification(){
+        System.out.print("Vouslez-vous bonifier l'étudiant? O/N : ");
+        char reponse = clavier.nextLine().charAt(0);
+        if(reponse == 'o' || reponse == 'O') return true;
+        else if(reponse == 'n' || reponse == 'N') return false;
+        else System.out.println("NB: Tous autre reponse est consideré comme(Non) !!"); return false;
+    }
+
+    boolean demaderCalculeAge(){
+        System.out.print("Reponder par: O/N : ");
+        char reponse = clavier.nextLine().charAt(0);
+        if(reponse == 'o' || reponse == 'O') return true;
+        else if(reponse == 'n' || reponse == 'N') return false;
+        else System.out.println("NB: Tous autre reponse est consideré comme(Non) !!"); return false;
+    }
+
+    public int choisireEtudiant(Etudiant[] etudiants) {
+        System.out.print("Donnez le matricule de l'étudiant : ");
+        int longueur = etudiants.length, position = -1;
+        String matricule = null;
+        do{
+            matricule = clavier.nextLine();
+            for(int i = 0; i < longueur; i++)
+                if (etudiants[i].matricule.equals(matricule)) position = i;
+
+            if(position == -1){
+                System.err.println("Matricule incorrect");
+                System.out.println("Recommencer : ");
+            }
+        }while (position == -1);
+        return position;
+    }
 }
+R

@@ -8,33 +8,43 @@ public class Etudiant
     char genre;
     Date dateNaissance;
     double moyenne;
+    double nombreAnnee;
+
 
     // Les constructeur
-    public Etudiant(String matricule, String nom, char genre, Date dateNaissance) {
+    public Etudiant(String matricule, String nom, char genre, Date dateNaissance, double moyenne) {
         this.matricule = matricule;
         this.nom = nom;
         this.genre = genre;
         this.dateNaissance = dateNaissance;
-        this.moyenne = 0;
+        this.moyenne = moyenne;
+        this.nombreAnnee = 0;
     }
 
     // La procedure qui affiche les informations de l'étudiant
     void afficher(){
         System.out.println(" Matricule : " + matricule + "\n" +
                 " NOM : " + nom + "\n" +
-                " GENRE : " + genre +
-                " DATE DE NAISSANCE : " + dateNaissance +
+                " GENRE : " + genre + "\n" +
+                " DATE DE NAISSANCE : " + dateNaissance + "\n" +
                 " MOYENNE : " + moyenne);
     }
 
     // La fonction qui fait le Calcule de âge
-    public int calculerAge(){
-        return (new Date().getYear() - this.dateNaissance.getYear());
+    public int calculerAge(Date etudiantDateNaissance){
+        return (new Date().getYear() - etudiantDateNaissance.getYear());
     }
 
     // Donne du bonus a un étudiant
-    public double bonifier(double bonus){
-        moyenne += bonus;
-        return moyenne;
+    double bonifier(double bonus){
+        if(bonus < 0)
+            System.err.println("Erreur! il n'y a pas des bonus négatives!!!");
+        else if((this.moyenne + bonus) > 20){
+            System.err.println("Erreur! la moyenne bonifier ne doit pas excéder 20");
+            System.out.println("La moyenne soit initialiser à 20");
+            return moyenne = 20;
+        }else
+            return (moyenne += bonus);
+        return 0;
     }
 }
